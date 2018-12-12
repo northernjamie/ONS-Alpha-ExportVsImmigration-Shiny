@@ -56,6 +56,7 @@ server <- function(input, output) {
   
   
   output$regionmap <-  renderLeaflet({leaflet() %>%
+      addTiles(attribution = "Contains National Statistics data © Crown copyright and database right 2018 | Contains OS data © Crown copyright and database right 2018") %>%
       addProviderTiles("CartoDB.Positron") %>%
       setView(-2,53, zoom = 6) %>%
       addLegend(pal = col_pal_perc_diff,
