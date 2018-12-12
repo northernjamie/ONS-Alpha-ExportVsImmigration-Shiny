@@ -1,0 +1,111 @@
+input[type="number"] {
+  max-width: 80%;
+}
+
+.xshiny-progress .xprogress-text {
+  position:fixed;
+    top:0;
+    left:0;
+    background:rgba(100,100,100,0.6);
+    width:100%;
+    height:100%;
+    color: #111111;
+    text-align: center;
+    padding-top:50%;
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+div.outer {
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Customize fonts */
+body, label, input, button, select { 
+  font-family: 'Helvetica Neue', Helvetica;
+  font-weight: 200;
+}
+h1, h2, h3, h4 { font-weight: 400; }
+
+.boldtabletext {
+  font-weight: bold;
+}
+
+#statbox td {
+  border-bottom: 1px solid #ddd;
+  padding:  5px
+}
+
+#controls {
+  /* Appearance */
+  background-color: white;
+  padding: 0 20px 20px 20px;
+  cursor: move;
+  /* Fade out while not hovering */
+  opacity: 0.65;
+  zoom: 0.9;
+  transition: opacity 500ms 1s;
+}
+#controls:hover {
+  /* Fade in while hovering */
+  opacity: 0.95;
+  transition-delay: 0;
+}
+
+/* Position and style citation */
+#cite {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 12px;
+}
+
+/* If not using map tiles, show a white background */
+.leaflet-container {
+  background-color: white !important;
+}
+
+/* Styling for the cluster marker*/
+
+.marker-cluster-custom {
+  background-color: rgba(100,100,100,0.6);
+  color: white;
+}
+
+.marker-cluster div {
+  background-color: rgba(90,90,90,0.6);
+}
+
+.marker-cluster-custom {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster-custom div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster-custom span {
+	line-height: 30px;
+	}
+	
+.popupTitle {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.popupBody {
+  font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;;
+}
