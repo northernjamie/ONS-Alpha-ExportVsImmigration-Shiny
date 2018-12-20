@@ -13,7 +13,9 @@ Cloning this repo and running the scripts locally would be the best way to do th
 
 The app.R file will run from a new R project, in Rstudio.
 
+
 To prepare the data, ExportsVsImmigration.R is required. This will fetch data via api from the sparql endpoint at http://gss-data.org.uk convert it and merge it, ultimately loading in a geojson file of English regions (englandregions.geojson), and saving back out a geojson will of English regions with data (englandregions_trade_migration.geojson). This is then used by the app.R file
+
 
 ## Comments
 
