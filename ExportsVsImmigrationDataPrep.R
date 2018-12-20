@@ -1,4 +1,4 @@
-#### Script to preapre the data for the Exports Vs Trade Shiny App ####
+#### Script to prepare the data for the Exports Vs Trade Shiny App ####
 
 #### Libraries ####
 

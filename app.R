@@ -29,7 +29,7 @@ ui <- navbarPage("GSS Trade and Migration", id="nav",
                                             width=450,
                                             height="90%",
                                             h4("Trade and migration in English Regions"),
-                                            selectInput('choosemap','Choose data to show on map',c('Total Exports', 'Total Immigration', 'Percentage Share of Exports', 'Percentage Share of Immigration', 'Difference Between Immigration and Exports')),
+                                            selectInput('choosemap','Choose data to show on map',c('Total value of international exports', 'Total number of immigrants', '% Share of nationwide exports', '% Share of national immigration total', '% Point difference between national share of export trade and immigration')),
                                             h5("Click a region to see summary statistics"),
                                             htmlOutput('regionname'),
                                             htmlOutput('totalexport'),
@@ -82,15 +82,15 @@ server <- function(input, output) {
     output$regionname <- renderText(paste0('<h3>',txt_region_name,'</h3>'))
     output$totalexport <- renderText(paste0('<h5>Total value of international exports (Q4 2016):</h5><h4>',pounds(txt_total_export*1000),'</h4>'))
     output$totalimmigration <- renderText(paste0('<h5>Total number of immigrants (Mid 2016 - Mid 2017):</h5><h4>',format(txt_total_imm,big.mark=","),'</h4>'))
-    output$percshareexport <- renderText(paste0('<h5>% Share of national export total (Q4 2016):</h5><h4>',sprintf("%.1f %%",100*txt_perc_export),'</h4>'))
-    output$percshareimmigration <- renderText(paste0('<h5>% Share of national immigrants total (Mid 2016 - Mid 2017):</h5><h4>',sprintf("%.1f %%",100*txt_perc_imm),'</h4>'))
-    output$percpointdifference <- renderText(paste0('<h5>Percentage point difference between share of immigration and exports</h5><h4>',sprintf("%.1f %%",txt_perc_difference),'</h4>'))
+    output$percshareexport <- renderText(paste0('<h5>% Share of nationwide exports (Q4 2016):</h5><h4>',sprintf("%.1f %%",100*txt_perc_export),'</h4>'))
+    output$percshareimmigration <- renderText(paste0('<h5>% Share of national immigration total (Mid 2016 - Mid 2017):</h5><h4>',sprintf("%.1f %%",100*txt_perc_imm),'</h4>'))
+    output$percpointdifference <- renderText(paste0('<h5>% Point difference between share of immigration and exports:</h5><h4>',sprintf("%.1f %%",txt_perc_difference),'</h4>'))
     
   })
   
   
   observeEvent(input$choosemap, {
-    if(input$choosemap == 'Total Exports') {
+    if(input$choosemap == 'Total value of international exports') {
       col_pal <- colorNumeric("Spectral",domain = merged_trade_migration$total_export);
       
       leafletProxy("regionmap") %>%
@@ -100,9 +100,9 @@ server <- function(input, output) {
         addLegend(pal = col_pal, values = merged_trade_migration$total_export, opacity = 0.7,
                   position = 'bottomleft',
                   labFormat = labelFormat(prefix="£", big.mark = ",", transform = function(x) 1000 * x),
-                  title = paste0("Total Value of Exports",br(),"Q4 2016"))
+                  title = paste0("Total value of international exports",br(),"Q4 2016"))
     }
-    if(input$choosemap == 'Total Immigration') {
+    if(input$choosemap == 'Total number of immigrants') {
       col_pal <- colorNumeric("Spectral",domain = merged_trade_migration$sum_region);
       
       leafletProxy("regionmap") %>%
@@ -111,9 +111,9 @@ server <- function(input, output) {
         addPolygons(data = engregions,layerId = ~region,weight = 2,color = "#111111", fillOpacity = 0.7, fillColor = ~col_pal(sum_region)) %>%
         addLegend(pal = col_pal, values = merged_trade_migration$sum_region, opacity = 0.7,
                   position = 'bottomleft', 
-                  title = paste0("Total Number of immigrants",br(),"Mid-2016 to Mid-2017"))
+                  title = paste0("Total number of immigrants",br(),"Mid-2016 to Mid-2017"))
     }
-    if(input$choosemap == 'Percentage Share of Exports') {
+    if(input$choosemap == '% Share of nationwide exports') {
       col_pal <- colorNumeric("Spectral",domain = merged_trade_migration$perc_of_total);
       
       leafletProxy("regionmap") %>%
@@ -125,7 +125,7 @@ server <- function(input, output) {
                   labFormat = labelFormat(suffix="%", transform = function(x) 100 * x),
                   title = paste0("% Share of nationwide exports",br(),"Q4 2016"))
     }
-    if(input$choosemap == 'Percentage Share of Immigration') {
+    if(input$choosemap == '% Share of national immigration total') {
       col_pal <- colorNumeric("Spectral",domain = merged_trade_migration$perc_of_total_imm);
       
       leafletProxy("regionmap") %>%
@@ -137,7 +137,7 @@ server <- function(input, output) {
                   labFormat = labelFormat(suffix="%", transform = function(x) 100 * x),
                   title = paste0("% Share of national immigration total",br(),"Mid-2016 to Mid-2017"))
     }
-    if(input$choosemap == 'Difference Between Immigration and Exports') {
+    if(input$choosemap == '% Point difference between national share of export trade and immigration') {
       col_pal <- colorNumeric("Spectral",domain = merged_trade_migration$perc_difference);
       
       leafletProxy("regionmap") %>%
@@ -147,7 +147,7 @@ server <- function(input, output) {
         addLegend(pal = col_pal, values = merged_trade_migration$perc_difference, opacity = 0.7,
                   position = 'bottomleft', 
                   labFormat = labelFormat(suffix="%"),
-                  title = paste0("% point difference between national",br(),"share of export trade and immigration"))
+                  title = paste0("% Point difference between national",br(),"share of export trade and immigration"))
     }
   })
   
